@@ -6,6 +6,7 @@
 #include "ThingType.h"
 #include "UDMFProperty.h"
 #include "Utility/PropertyList/PropertyList.h"
+#include "MapInfo.h"
 
 // Tag types
 enum TagTypes
@@ -75,8 +76,7 @@ struct udmfp_t
 struct gc_mapinfo_t
 {
 	string	mapname;
-	string	sky1;
-	string	sky2;
+	string	sky;
 };
 
 struct sectype_t
@@ -187,7 +187,8 @@ private:
 	vector<sectype_t>	sector_types;
 
 	// Map info
-	vector<gc_mapinfo_t>	maps;
+	vector<gc_mapinfo_t>	maps_basic;
+	MapInfo					maps;
 
 	// UDMF properties
 	UDMFPropMap	udmf_vertex_props;
@@ -262,9 +263,6 @@ public:
 	bool			portSupportsGame(unsigned port, string game);
 	bool			gameSupportsFilter(string game, string filter);
 	bool			mapFormatSupported(int map_format, int game, int port = -1);
-	unsigned		nMapNames() { return maps.size(); }
-	string			mapName(unsigned index);
-	gc_mapinfo_t	mapInfo(string mapname);
 
 	// Config #include handling
 	void	buildConfig(string filename, string& out);
@@ -299,6 +297,11 @@ public:
 	void	setThingFlag(unsigned flag_index, MapThing* thing, bool set = true);
 	void	setThingFlag(string udmf_name, MapThing* thing, int map_format, bool set = true);
 	void	setThingBasicFlag(string flag, MapThing* line, int map_format, bool set = true);
+
+	// MAPINFO
+	MapInfo&	mapInfo() { return maps; }
+	bool		parseMapInfo(Archive* archive);
+	void		clearMapInfo();
 
 	// DECORATE
 	bool	parseDecorateDefs(Archive* archive);

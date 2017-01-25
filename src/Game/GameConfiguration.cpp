@@ -102,6 +102,7 @@ void GameConfiguration::setDefaults()
 	defaults_sector.clear();
 	defaults_thing.clear();
 	maps.clear();
+	maps_basic.clear();
 	sky_flat = "F_SKY1";
 	script_language = "";
 	light_levels.clear();
@@ -419,35 +420,6 @@ void GameConfiguration::init()
 	// Load last configuration if any
 	if (game_configuration != "")
 		openConfig(game_configuration, port_configuration);
-}
-
-/* GameConfiguration::mapName
- * Returns the map name at [index] for the game configuration
- *******************************************************************/
-string GameConfiguration::mapName(unsigned index)
-{
-	// Check index
-	if (index > maps.size())
-		return "";
-
-	return maps[index].mapname;
-}
-
-/* GameConfiguration::mapInfo
- * Returns map info for the map matching [name]
- *******************************************************************/
-gc_mapinfo_t GameConfiguration::mapInfo(string name)
-{
-	for (unsigned a = 0; a < maps.size(); a++)
-	{
-		if (maps[a].mapname == name)
-			return maps[a];
-	}
-
-	if (maps.size() > 0)
-		return maps[0];
-	else
-		return gc_mapinfo_t();
 }
 
 /* GameConfiguration::gameConfig
@@ -1055,8 +1027,8 @@ void GameConfiguration::readGameSection(ParseTreeNode* node_game, bool port_sect
 				// Map definition
 				if (S_CMPNOCASE(block->getType(), "map"))
 				{
-					gc_mapinfo_t map;
-					map.mapname = block->getName();
+					MapInfo::Map map;
+					map.entry_name = block->getName();
 
 					// Go through map properties
 					for (unsigned c = 0; c < block->nChildren(); c++)
@@ -1075,7 +1047,8 @@ void GameConfiguration::readGameSection(ParseTreeNode* node_game, bool port_sect
 						}
 					}
 
-					maps.push_back(map);
+					maps.addOrUpdateMap(map);
+					maps_basic.push_back({ map.entry_name, map.sky1 });
 				}
 			}
 		}
@@ -1974,6 +1947,40 @@ void GameConfiguration::setThingBasicFlag(string flag, MapThing* thing, int map_
 
 	// Not basic
 	thingFlagSet(flag, thing, map_format);
+}
+
+/* GameConfiguration::parseMapInfo
+ * Parses all *MAPINFO definitions in [archive]
+ *******************************************************************/
+bool GameConfiguration::parseMapInfo(Archive* archive)
+{
+	// ZMAPINFO only for now
+
+	// Get ZMAPINFO entry (if any)
+	Archive::search_options_t opt;
+	opt.match_type = EntryType::getType("zmapinfo");
+	auto mapinfo_entry = archive->findFirst(opt);
+	if (mapinfo_entry)
+		return maps.parseZMapInfo(mapinfo_entry);
+
+	return false;
+}
+
+/* GameConfiguration::clearMapInfo
+ * Clears all previously read MAPINFO definitions
+ *******************************************************************/
+void GameConfiguration::clearMapInfo()
+{
+	maps.clear();
+	
+	// Re-add basic map info from game configuration
+	for (auto& bm : maps_basic)
+	{
+		MapInfo::Map nm;
+		nm.entry_name = bm.mapname;
+		nm.sky1 = bm.sky;
+		maps.addOrUpdateMap(nm);
+	}
 }
 
 // This is used to have the same priority order as DB2
@@ -3518,8 +3525,8 @@ void GameConfiguration::dumpThingTypes()
 void GameConfiguration::dumpValidMapNames()
 {
 	wxLogMessage("Valid Map Names:");
-	for (unsigned a = 0; a < maps.size(); a++)
-		wxLogMessage(maps[a].mapname);
+	for (unsigned a = 0; a < maps.nMaps(); a++)
+		wxLogMessage(maps.getMap(a).entry_name);
 }
 
 /* GameConfiguration::dumpUDMFProperties

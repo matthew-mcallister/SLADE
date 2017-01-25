@@ -46,6 +46,7 @@ public:
 	void	enableDecorate(bool enable) { decorate = enable; }
 
 	string	getName() { return name; }
+	string	currentToken() { return token_current; }
 	bool	openFile(string filename, uint32_t offset = 0, uint32_t length = 0);
 	bool	openString(string text, uint32_t offset = 0, uint32_t length = 0, string source = "unknown");
 	bool	openMem(const char* mem, uint32_t length, string source);
@@ -72,6 +73,11 @@ public:
 	void	getFloat(float* f);
 	void	getDouble(double* d);
 	void	getBool(bool* b);
+
+	bool	checkInteger(int* i);
+	bool	checkLong(long* l);
+	bool	checkFloat(float* f);
+	bool	checkDouble(double* d);
 
 	void	getTokensUntil(vector<string>& tokens, string end);
 

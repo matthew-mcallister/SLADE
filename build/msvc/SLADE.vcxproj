@@ -741,6 +741,7 @@
     <ClCompile Include="..\..\src\Game\ActionSpecial.cpp" />
     <ClCompile Include="..\..\src\Game\GameConfiguration.cpp" />
     <ClCompile Include="..\..\src\Game\GenLineSpecial.cpp" />
+    <ClCompile Include="..\..\src\Game\MapInfo.cpp" />
     <ClCompile Include="..\..\src\Game\ThingType.cpp" />
     <ClCompile Include="..\..\src\Game\UDMFProperty.cpp" />
     <ClCompile Include="..\..\src\Game\ZScript.cpp" />
@@ -1459,6 +1460,7 @@
     <ClInclude Include="..\..\src\Game\Args.h" />
     <ClInclude Include="..\..\src\Game\GameConfiguration.h" />
     <ClInclude Include="..\..\src\Game\GenLineSpecial.h" />
+    <ClInclude Include="..\..\src\Game\MapInfo.h" />
     <ClInclude Include="..\..\src\Game\ThingType.h" />
     <ClInclude Include="..\..\src\Game\UDMFProperty.h" />
     <ClInclude Include="..\..\src\Game\ZScript.h" />

@@ -636,6 +636,56 @@ void Tokenizer::getBool(bool* b)
 		*b = !!atoi(CHR(token_current));
 }
 
+bool Tokenizer::checkInteger(int* i)
+{
+	// Read token
+	readToken();
+
+	// Convert to long
+	long tmp;
+	if (token_current.ToLong(&tmp))
+	{
+		*i = tmp;
+		return true;
+	}
+	else
+		return false;
+}
+
+bool Tokenizer::checkLong(long* l)
+{
+	// Read token
+	readToken();
+
+	// Convert to long
+	return (token_current.ToLong(l));
+}
+
+bool Tokenizer::checkFloat(float* f)
+{
+	// Read token
+	readToken();
+
+	// Convert to float
+	double tmp;
+	if (token_current.ToDouble(&tmp))
+	{
+		*f = tmp;
+		return true;
+	}
+	else
+		return false;
+}
+
+bool Tokenizer::checkDouble(double* d)
+{
+	// Read token
+	readToken();
+
+	// Convert to double
+	return token_current.ToDouble(d);
+}
+
 /* Tokenizer::getTokensUntil
  * Reads tokens into [tokens] until either [end] token is found, or
  * the end of the data is reached

@@ -67,7 +67,8 @@ public:
 		msizer->Add(sizer, 1, wxEXPAND|wxALL, 10);
 
 		// Open selected game configuration if no map names are currently loaded
-		if (theGameConfiguration->nMapNames() == 0)
+		auto mapInfo = theGameConfiguration->mapInfo();
+		if (mapInfo.nMaps() == 0)
 		{
 			string gname = theGameConfiguration->gameConfig(game).name;
 			string pname = theGameConfiguration->portConfig(port).name;
@@ -93,10 +94,10 @@ public:
 			cbo_mapname->SetMaxLength(8);
 
 		// Add possible map names to the combo box
-		for (unsigned a = 0; a < theGameConfiguration->nMapNames(); a++)
+		for (unsigned a = 0; a < mapInfo.nMaps(); a++)
 		{
 			// Check if map already exists
-			string mapname = theGameConfiguration->mapName(a);
+			string mapname = mapInfo.getMap(a).entry_name;
 			bool exists = false;
 			for (unsigned m = 0; m < maps.size(); m++)
 			{
@@ -112,7 +113,7 @@ public:
 		}
 
 		// Set inital map name selection
-		if (theGameConfiguration->nMapNames() > 0)
+		if (mapInfo.nMaps() > 0)
 			cbo_mapname->SetSelection(0);
 
 		// Create map format combo box

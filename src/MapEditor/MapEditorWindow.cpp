@@ -560,6 +560,11 @@ bool MapEditorWindow::openMap(Archive::mapdesc_t map)
 		for (int i = 0; i < theArchiveManager->numArchives(); ++i)
 			theGameConfiguration->parseDecorateDefs(theArchiveManager->getArchive(i));
 
+		// Read ZMAPINFO definitions if any
+		theGameConfiguration->clearMapInfo();
+		for (int i = 0; i < theArchiveManager->numArchives(); ++i)
+			theGameConfiguration->parseMapInfo(theArchiveManager->getArchive(i));
+
 		// Load scripts if any
 		loadMapScripts(map);
 

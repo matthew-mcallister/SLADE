@@ -163,7 +163,7 @@ void MapRenderer3D::refresh()
 	ceilings.clear();
 
 	// Set sky texture
-	gc_mapinfo_t minf = theGameConfiguration->mapInfo(map->mapName());
+	auto minf = theGameConfiguration->mapInfo().getMap(map->mapName());
 	skytex1 = minf.sky1;
 	skytex2 = minf.sky2;
 	skycol_top.a = 0;
