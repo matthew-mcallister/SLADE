@@ -31,7 +31,7 @@
 #include "TextEntryPanel.h"
 #include "Archive/ArchiveManager.h"
 #include "MainApp.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 
 
 /*******************************************************************

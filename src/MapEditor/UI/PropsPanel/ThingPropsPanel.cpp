@@ -29,7 +29,7 @@
  *******************************************************************/
 #include "Main.h"
 #include "ThingPropsPanel.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 #include "MapEditor/MapEditorWindow.h"
 #include "MapEditor/UI/Dialogs/ActionSpecialDialog.h"
 #include "MapEditor/UI/Dialogs/ThingTypeBrowser.h"

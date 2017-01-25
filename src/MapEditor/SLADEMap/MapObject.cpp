@@ -31,7 +31,7 @@
 #include "Main.h"
 #include "MapObject.h"
 #include "SLADEMap.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 #include "MainApp.h"
 
 

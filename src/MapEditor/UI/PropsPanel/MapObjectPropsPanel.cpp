@@ -32,7 +32,7 @@
 #include "Main.h"
 #include "MapObjectPropsPanel.h"
 #include "Graphics/Icons.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 #include "MapEditor/MapEditorWindow.h"
 #include "MapEditor/SLADEMap/SLADEMap.h"
 #include "MOPGProperty.h"

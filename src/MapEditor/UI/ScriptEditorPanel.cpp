@@ -31,7 +31,7 @@
 #include "ScriptEditorPanel.h"
 #include "Archive/Archive.h"
 #include "MainEditor/EntryOperations.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 #include "MapEditor/MapEditorWindow.h"
 #include "UI/SToolBar/SToolBar.h"
 

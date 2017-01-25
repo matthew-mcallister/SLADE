@@ -30,7 +30,7 @@
  *******************************************************************/
 #include "Main.h"
 #include "LinePropsPanel.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 #include "MapEditor/MapEditorWindow.h"
 #include "MapEditor/UI/Dialogs/ActionSpecialDialog.h"
 #include "MapObjectPropsPanel.h"

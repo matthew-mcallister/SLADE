@@ -32,7 +32,7 @@
 #include "UI/WxStuff.h"
 #include "MapRenderer2D.h"
 #include "MapEditor/SLADEMap/SLADEMap.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 #include "General/ColourConfiguration.h"
 #include "MapEditor/MapEditorWindow.h"
 #include "OpenGL/GLTexture.h"

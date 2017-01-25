@@ -142,9 +142,6 @@
     <Filter Include="Dialogs\Setup Wizard">
       <UniqueIdentifier>{90dc0f0c-92e7-414e-a30b-76c8c288e615}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Map Editor\Game Configuration">
-      <UniqueIdentifier>{69273e0b-abaf-403b-b0cb-f3aede6fb016}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graphics\Composite Texture">
       <UniqueIdentifier>{25d4520a-4015-4838-81d3-9596df6d636e}</UniqueIdentifier>
     </Filter>
@@ -159,6 +156,9 @@
     </Filter>
     <Filter Include="External\wxEmail">
       <UniqueIdentifier>{4d45f584-81e4-44d0-979d-f541131c9cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{6484ec95-d6fd-4bdc-96ee-3e1faf24e057}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1218,21 +1218,6 @@
     <ClCompile Include="..\..\src\MapEditor\SectorBuilder.cpp">
       <Filter>Map Editor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\MapEditor\GameConfiguration\ActionSpecial.cpp">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\MapEditor\GameConfiguration\GameConfiguration.cpp">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\MapEditor\GameConfiguration\GenLineSpecial.cpp">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\MapEditor\GameConfiguration\ThingType.cpp">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\MapEditor\GameConfiguration\UDMFProperty.cpp">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\MapEditor\Renderer\MapRenderer2D.cpp">
       <Filter>Map Editor\Renderer</Filter>
     </ClCompile>
@@ -1373,6 +1358,27 @@
     </ClCompile>
     <ClCompile Include="..\..\src\UI\TextEditor\Lexer.cpp">
       <Filter>UI\Text Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Game\ZScript.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Utility\StringUtils.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Game\ActionSpecial.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Game\GameConfiguration.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Game\GenLineSpecial.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Game\ThingType.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Game\UDMFProperty.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -2202,24 +2208,6 @@
     <ClInclude Include="..\..\src\MapEditor\SectorBuilder.h">
       <Filter>Map Editor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\ActionSpecial.h">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\Args.h">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\GameConfiguration.h">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\GenLineSpecial.h">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\ThingType.h">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\UDMFProperty.h">
-      <Filter>Map Editor\Game Configuration</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\MapEditor\Renderer\MapRenderer2D.h">
       <Filter>Map Editor\Renderer</Filter>
     </ClInclude>
@@ -2383,6 +2371,30 @@
     </ClInclude>
     <ClInclude Include="..\..\src\UI\TextEditor\Lexer.h">
       <Filter>UI\Text Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Game\ZScript.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Utility\StringUtils.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Game\ActionSpecial.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Game\Args.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Game\GameConfiguration.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Game\GenLineSpecial.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Game\ThingType.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Game\UDMFProperty.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

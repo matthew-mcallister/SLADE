@@ -44,7 +44,7 @@
 #include "Graphics/Icons.h"
 #include "Graphics/SImage/SIFormat.h"
 #include "MainEditor/MainWindow.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 #include "MapEditor/MapEditorWindow.h"
 #include "MapEditor/NodeBuilders.h"
 #include "OpenGL/Drawing.h"

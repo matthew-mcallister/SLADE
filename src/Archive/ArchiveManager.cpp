@@ -35,7 +35,7 @@
 #include "General/Console/Console.h"
 #include "UI/SplashWindow.h"
 #include "General/ResourceManager.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 
 
 /*******************************************************************

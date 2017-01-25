@@ -738,6 +738,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release - FTGL|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\src\Game\ActionSpecial.cpp" />
+    <ClCompile Include="..\..\src\Game\GameConfiguration.cpp" />
+    <ClCompile Include="..\..\src\Game\GenLineSpecial.cpp" />
+    <ClCompile Include="..\..\src\Game\ThingType.cpp" />
+    <ClCompile Include="..\..\src\Game\UDMFProperty.cpp" />
+    <ClCompile Include="..\..\src\Game\ZScript.cpp" />
     <ClCompile Include="..\..\src\General\Clipboard.cpp" />
     <ClCompile Include="..\..\src\General\ColourConfiguration.cpp" />
     <ClCompile Include="..\..\src\General\Console\Console.cpp" />
@@ -1144,11 +1150,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release - FTGL|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\src\MapEditor\GameConfiguration\ActionSpecial.cpp" />
-    <ClCompile Include="..\..\src\MapEditor\GameConfiguration\GameConfiguration.cpp" />
-    <ClCompile Include="..\..\src\MapEditor\GameConfiguration\GenLineSpecial.cpp" />
-    <ClCompile Include="..\..\src\MapEditor\GameConfiguration\ThingType.cpp" />
-    <ClCompile Include="..\..\src\MapEditor\GameConfiguration\UDMFProperty.cpp" />
     <ClCompile Include="..\..\src\MapEditor\MapBackupManager.cpp" />
     <ClCompile Include="..\..\src\MapEditor\MapChecks.cpp" />
     <ClCompile Include="..\..\src\MapEditor\MapEditor.cpp" />
@@ -1255,6 +1256,7 @@
     <ClCompile Include="..\..\src\Utility\PropertyList\Property.cpp" />
     <ClCompile Include="..\..\src\Utility\PropertyList\PropertyList.cpp" />
     <ClCompile Include="..\..\src\Utility\SFileDialog.cpp" />
+    <ClCompile Include="..\..\src\Utility\StringUtils.cpp" />
     <ClCompile Include="..\..\src\Utility\Tokenizer.cpp" />
     <ClCompile Include="..\..\src\Utility\Tree.cpp" />
     <ClCompile Include="..\..\src\External\zlib\adler32.c">
@@ -1453,6 +1455,13 @@
     <ClInclude Include="..\..\src\External\email\wxEmailMessage.h" />
     <ClInclude Include="..\..\src\External\email\wxEmailMessageID.h" />
     <ClInclude Include="..\..\src\External\email\wxMailer.h" />
+    <ClInclude Include="..\..\src\Game\ActionSpecial.h" />
+    <ClInclude Include="..\..\src\Game\Args.h" />
+    <ClInclude Include="..\..\src\Game\GameConfiguration.h" />
+    <ClInclude Include="..\..\src\Game\GenLineSpecial.h" />
+    <ClInclude Include="..\..\src\Game\ThingType.h" />
+    <ClInclude Include="..\..\src\Game\UDMFProperty.h" />
+    <ClInclude Include="..\..\src\Game\ZScript.h" />
     <ClInclude Include="..\..\src\General\Clipboard.h" />
     <ClInclude Include="..\..\src\General\ColourConfiguration.h" />
     <ClInclude Include="..\..\src\General\Console\Console.h" />
@@ -1572,12 +1581,6 @@
     <ClInclude Include="..\..\src\MainEditor\UI\TextureXEditor\TextureXEditor.h" />
     <ClInclude Include="..\..\src\MainEditor\UI\TextureXEditor\TextureXPanel.h" />
     <ClInclude Include="..\..\src\MainEditor\UI\TextureXEditor\ZTextureEditorPanel.h" />
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\ActionSpecial.h" />
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\Args.h" />
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\GameConfiguration.h" />
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\GenLineSpecial.h" />
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\ThingType.h" />
-    <ClInclude Include="..\..\src\MapEditor\GameConfiguration\UDMFProperty.h" />
     <ClInclude Include="..\..\src\MapEditor\MapBackupManager.h" />
     <ClInclude Include="..\..\src\MapEditor\MapChecks.h" />
     <ClInclude Include="..\..\src\MapEditor\MapEditor.h" />
@@ -1676,6 +1679,7 @@
     <ClInclude Include="..\..\src\Utility\PropertyList\Property.h" />
     <ClInclude Include="..\..\src\Utility\PropertyList\PropertyList.h" />
     <ClInclude Include="..\..\src\Utility\SFileDialog.h" />
+    <ClInclude Include="..\..\src\Utility\StringUtils.h" />
     <ClInclude Include="..\..\src\Utility\Structs.h" />
     <ClInclude Include="..\..\src\Utility\Tokenizer.h" />
     <ClInclude Include="..\..\src\Utility\Tree.h" />

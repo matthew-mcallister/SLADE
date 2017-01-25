@@ -30,7 +30,7 @@
  *******************************************************************/
 #include "Main.h"
 #include "ActionSpecialDialog.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 #include "MapEditor/MapEditorWindow.h"
 #include "MapEditor/UI/GenLineSpecialPanel.h"
 #include "UI/NumberTextCtrl.h"

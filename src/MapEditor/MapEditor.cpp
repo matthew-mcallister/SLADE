@@ -34,7 +34,7 @@
 #include "Archive/ArchiveManager.h"
 #include "UI/WxStuff.h"
 #include "MapEditorWindow.h"
-#include "GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 #include "Utility/MathStuff.h"
 #include "General/Console/Console.h"
 #include "UI/MapCanvas.h"

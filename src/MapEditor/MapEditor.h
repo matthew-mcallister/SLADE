@@ -4,7 +4,7 @@
 
 #include "SLADEMap/SLADEMap.h"
 #include "ObjectEdit.h"
-#include "GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 
 struct selection_3d_t
 {

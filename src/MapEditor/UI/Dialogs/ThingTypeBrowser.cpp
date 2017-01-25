@@ -30,7 +30,7 @@
  *******************************************************************/
 #include "Main.h"
 #include "ThingTypeBrowser.h"
-#include "MapEditor/GameConfiguration/GameConfiguration.h"
+#include "Game/GameConfiguration.h"
 #include "MapEditor/MapEditorWindow.h"
 #include "OpenGL/Drawing.h"
 
