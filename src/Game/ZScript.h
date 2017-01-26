@@ -1,9 +1,15 @@
 #pragma once
 
 #include "Utility/Tokenizer.h"
+#include "Utility/PropertyList/PropertyList.h"
+
+class ArchiveEntry;
 
 namespace ZScript
 {
+	// Helpers
+	void	logUnexpectedToken(Tokenizer& tz, string parsing, string expected, string got = "");
+
 	class Enumerator
 	{
 	public:
@@ -86,6 +92,7 @@ namespace ZScript
 		vector<Variable>	variables;
 		vector<Function>	functions;
 		vector<Enumerator>	enumerators;
+		PropertyList		default_properties;
 	};
 
 	class Definitions	// rename this also
@@ -94,7 +101,7 @@ namespace ZScript
 		Definitions() {}
 		~Definitions() {}
 
-		bool	parseZScript(MemChunk& mc);
+		bool	parseZScript(ArchiveEntry* entry);
 
 	private:
 		vector<Class>		classes;

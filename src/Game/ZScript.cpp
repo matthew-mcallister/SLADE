@@ -1,9 +1,22 @@
 
 #include "Main.h"
 #include "ZScript.h"
+#include "Archive/Archive.h"
 #include "Utility/StringUtils.h"
 
 using namespace ZScript;
+
+void ZScript::logUnexpectedToken(Tokenizer& tz, string parsing, string expected, string got)
+{
+	LOG_MESSAGE(
+		1,
+		"Error parsing %s: Expected %s, got \"%s\" at line %d",
+		parsing,
+		expected,
+		(got.empty()) ? tz.currentToken() : got,
+		tz.lineNo()
+	);
+}
 
 
 bool Enumerator::parse(Tokenizer& tz)
@@ -12,12 +25,7 @@ bool Enumerator::parse(Tokenizer& tz)
 	string token = tz.getToken();
 	if (tz.isSpecialCharacter(token[0]))
 	{
-		LOG_MESSAGE(
-			1,
-			"Error parsing enum: Expected valid enumerator name, got \"%s\" at line %d",
-			token,
-			tz.lineNo()
-		);
+		logUnexpectedToken(tz, "enum", "valid enumerator name", token);
 		return false;
 	}
 	name = token;
@@ -26,12 +34,7 @@ bool Enumerator::parse(Tokenizer& tz)
 	tz.getToken(&token);
 	if (token != "{")
 	{
-		LOG_MESSAGE(
-			1,
-			"Error parsing enum: Expected \"{\", got \"%s\" at line %d",
-			token,
-			tz.lineNo()
-		);
+		logUnexpectedToken(tz, "enum", "\"{\"", token);
 		return false;
 	}
 
@@ -43,7 +46,7 @@ bool Enumerator::parse(Tokenizer& tz)
 	{
 		val.name = token;
 
-		// Don't bother parsing values yet, needs a proper parser for stuff like eg.
+		// Don't bother parsing values yet, needs a proper expression parser for stuff like eg.
 		// enum { VALUE1 = 2, VALUE2 = VALUE1+1 }
 		/*
 		tz.getToken(&token);
@@ -125,7 +128,7 @@ bool Class::parse(Tokenizer& tz)
 	if (tz.isSpecialCharacter(token[0]) || token.empty())
 	{
 		string ctype = (type == Type::Class) ? "class" : "struct";
-		LOG_MESSAGE(1, "Error parsing %s: Expected %s name, got %s at line %d", ctype, ctype, token, tz.lineNo());
+		logUnexpectedToken(tz, ctype, S_FMT("%s name", ctype), token);
 		return false;
 	}
 	name = token;
@@ -178,11 +181,39 @@ bool Class::parse(Tokenizer& tz)
 		// Default block
 		else if (token == "default")
 		{
-			// TODO
+			// Check opening brace
+			if (!tz.checkToken("{"))
+			{
+				logUnexpectedToken(tz, "class", "{");
+				return false;
+			}
+
+			// Begin parsing
+			tz.getToken(&token);
+			vector<string> expression;
 			while (token != "}")
 			{
+				// Flag
+				if (token.StartsWith("+") || token.StartsWith("-"))
+					default_properties.addFlag(token);
+				
+				// Property
+				else
+				{
+					// Parse expression
+					// For now ignore anything after the first whitespace/special character
+					// so stuff like arithmetic expressions or comma separated lists won't
+					// really work properly yet
+					expression.clear();
+					tz.getTokensUntil(expression, ";");
+					if (expression.empty())
+						default_properties.addFlag(token);
+					else
+						default_properties[token] = expression[0];
+				}
+
+				// Next property
 				tz.getToken(&token);
-				token.MakeLower();
 			}
 		}
 
@@ -190,23 +221,13 @@ bool Class::parse(Tokenizer& tz)
 		else if (token == "states")
 		{
 			// TODO
-			while (token != "}")
-				tz.getToken(&token);
+			tz.skipToken();
+			tz.skipSection("{", "}");
 		}
 
 		// Unknown block (skip it)
 		else if (token == "{")
-		{
-			int level = 1;
-			while (level > 0)
-			{
-				tz.getToken(&token);
-				if (token == "}")
-					level--;
-				else if (token == "{")
-					level++;
-			}
-		}
+			tz.skipSection("{", "}");
 
 		// Something else (variable or function)
 		else
@@ -221,14 +242,19 @@ bool Class::parse(Tokenizer& tz)
 	}
 
 	LOG_MESSAGE(2, "Parsed class/struct %s successfully", name);
+	LOG_MESSAGE(2, "Default properties:");
+	LOG_MESSAGE(2, "%s", default_properties.toString());
+
 	return true;
 }
 
 
-bool Definitions::parseZScript(MemChunk& mc)
+bool Definitions::parseZScript(ArchiveEntry* entry)
 {
 	Tokenizer tz;
-	tz.openMem(&mc, "ZScript");
+	tz.openMem(&entry->getMCData(), "ZScript");
+
+	LOG_MESSAGE(2, "Parsing ZScript entry \"%s\"", entry->getPath(true));
 
 	string token;
 	while (!tz.atEnd())
@@ -236,8 +262,28 @@ bool Definitions::parseZScript(MemChunk& mc)
 		tz.getToken(&token);
 		token.MakeLower();
 
+		// #include
+		if (token == "#include")
+		{
+			ArchiveEntry* include = entry->getParent()->entryAtPath(tz.getToken());
+			if (include)
+			{
+				if (!parseZScript(include))
+					return false;
+			}
+			else
+			{
+				LOG_MESSAGE(
+					1,
+					"ZScript Warning: Unable to find #included entry \"%s\" at line %d, ignoring",
+					tz.currentToken(),
+					tz.lineNo()
+				);
+			}
+		}
+
 		// ; (skip)
-		if (token == ";")
+		else if (token == ";")
 			continue;
 
 		else if (token == "struct")
@@ -296,7 +342,7 @@ CONSOLE_COMMAND(test_parse_zscript, 1, false)
 	if (entry)
 	{
 		Definitions test;
-		if (test.parseZScript(entry->getMCData()))
+		if (test.parseZScript(entry))
 			theConsole->logMessage("Parsed Successfully");
 		else
 			theConsole->logMessage("Parsing failed");
